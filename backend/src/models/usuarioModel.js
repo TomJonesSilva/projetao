@@ -1,8 +1,10 @@
 const connection = require('./connection');
 const auth = require('../utils/auth');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+const { v4: uuidv4 } = require('uuid');
+
 require('dotenv').config();
+
 
 const getAll = async () => {
     const [user] = await connection.execute('SELECT * FROM usuario');
@@ -13,7 +15,7 @@ const getAll = async () => {
 const buscarUsuario = async (req,res) =>{
     const decodedToken = req.decodedToken;
     
-    const query = 'SELECT * FROM usuario WHERE id = ?';
+    var query = 'SELECT * FROM usuario WHERE id = ?';
     const [usuarios] = await connection.execute(query, [decodedToken.id]);
   
     if (usuarios.length > 0) {
@@ -69,7 +71,7 @@ const sigUp = async (usuario,res) => {
 
    // const dataUTC = new Date(Date.now()).toUTCString();
     const senhaHash = await auth.criptografarSenha(senha);
-    const id =  auth.gerarUUID();
+    const id = uuidv4();
     var token = auth.gerarToken({id,email});
     var query = 'INSERT INTO usuario (id, nome, senha, email, telefones, ultimo_login, data_criacao, data_atualizacao) VALUES (?, ?, ?, ?, ?, NOW(), NOW(), NOW())';
     

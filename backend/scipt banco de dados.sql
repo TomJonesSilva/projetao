@@ -17,7 +17,7 @@ create table lojas(
 	id varchar(36) primary key,
     nome varchar(30) unique,
     id_mapa varchar(36),
-    acessibilidade int
+    acessibilidade bit
 );
 
 create table mapa(

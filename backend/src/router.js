@@ -6,6 +6,8 @@ const lojaController = require('./controllers/lojaController');
 
 const stockController = require('./controllers/stockController');
 
+const mapaController = require('./controllers/mapaController');
+
 const router = express.Router();
 
 const usuarioRouter = express.Router();
@@ -16,6 +18,9 @@ router.use('/loja', lojaRouter);
 
 const stockRouter = express.Router();
 router.use('/stock', stockRouter);
+
+const mapaRouter = express.Router();
+router.use('/mapa', mapaRouter);
 
 
 //usuario
@@ -34,6 +39,10 @@ lojaRouter.post('/buscar',lojaController.buscar);
 //stock
 stockRouter.get('/procura', stockController.get);
 stockRouter.post('./put', stockController.put);
+
+
+//mapa
+mapaRouter.get('/buscar', mapaController.buscar);
 
 
 

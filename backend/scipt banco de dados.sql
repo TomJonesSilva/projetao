@@ -1,30 +1,40 @@
 create database desafio2;
 use desafio2;
 
--- Criação da tabela usuario
 CREATE TABLE usuario (
-    id VARCHAR(36) PRIMARY KEY,
+    id INT NOT NULL AUTO_INCREMENT,
     nome VARCHAR(30),
     email VARCHAR(30) UNIQUE,
     senha VARCHAR(255), 
     telefones JSON,
     ultimo_login TIMESTAMP,
     data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    data_atualizacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    data_atualizacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (id)
 );
 
-create table lojas(
-	id varchar(36) primary key,
-    nome varchar(30) unique,
-    id_mapa varchar(36),
-    acessibilidade bit
+CREATE TABLE lojas(
+	id INT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(30) UNIQUE,
+    acessibilidade BIT,
+    PRIMARY KEY (id)
 );
 
-create table mapa(
-	id varchar (36) primary key,
-    nome varchar(30),
-    linhas int,
-    colunas int,
-    valores json
+CREATE TABLE mapa(
+	id INT NOT NULL AUTO_INCREMENT,
+    loja_id INT,
+    valores JSON,
+    PRIMARY KEY (id),
+    FOREIGN KEY (loja_id) REFERENCES lojas(id)
+);
+
+CREATE TABLE produtos(
+	id INT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(36),
+    mapa_id INT,
+    posicao_x INT,
+    posicao_y INT,
+    PRIMARY KEY (id),
+    FOREIGN KEY (mapa_id) REFERENCES mapa(id)
 );
 

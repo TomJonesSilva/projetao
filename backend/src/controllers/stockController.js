@@ -3,7 +3,7 @@ const router = express.Router();
 const Stock = require('../models/stock');
 
 // Obter informações de estoque para um produto específico e loja
-router.get('/:productId/:storeId', async (req, res) => {
+const procurar =  async (req, res) => {
   const productId = parseInt(req.params.productId);
   const storeId = parseInt(req.params.storeId);
 
@@ -21,7 +21,7 @@ router.get('/:productId/:storeId', async (req, res) => {
     console.error(error);
     return res.status(500).json({ error: 'Erro interno do servidor' });
   }
-});
+};
 
 // Atualizar informações de estoque para um produto e loja específicos
 router.put('/:productId/:storeId', async (req, res) => {

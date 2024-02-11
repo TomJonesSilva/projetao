@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 app.use(router);
 app.use(bodyParser.json());
-app.use('/stock', stockController);
+//app.use('/stock', stockController);
 
 module.exports = app;
 

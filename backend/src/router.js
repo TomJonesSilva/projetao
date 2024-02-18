@@ -40,7 +40,7 @@ stockRouter.post('./put', stockController.put);
 
 //mapa
 mapaRouter.get('/buscar', mapaController.buscar);
-mapaRouter.get('/cadastrar',);
+mapaRouter.get('/cadastrar',mapaController.cadastrarMapa);
 
 
 module.exports = router;
